@@ -112,12 +112,12 @@ class KH2Socket:
             msg = str(msg_id)
             for val in values:
                 msg += ";" + str(val)
-            CHUNK_SIZE = 30
+            message_limit = 30
             i = 0
-            if len(msg) > CHUNK_SIZE:
+            if len(msg) > message_limit:
                 while i < len(msg):
-                    part = msg[i: i + CHUNK_SIZE]
-                    if i + CHUNK_SIZE < len(msg):
+                    part = msg[i: i + message_limit]
+                    if i + message_limit < len(msg):
                         part += ";MOR\n"
                         logger.debug("Sending message in parts due to length: " + part)
                     else:
@@ -125,7 +125,7 @@ class KH2Socket:
                         logger.debug("Finished sending message in parts due to length: " + part)
 
                     self.client_socket.sendall(part.encode("utf-8"))
-                    i += CHUNK_SIZE
+                    i += message_limit
             else:
                 msg += "\n"
                 self.client_socket.sendall(msg.encode("utf-8"))

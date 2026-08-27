@@ -626,12 +626,12 @@ def patch_kh2(self, output_directory):
     ## if it's a server generating, if it's a build, or on the complete
     ## offchance that it's a custom world.
 
-    ICON_FILES = {
+    iconfiles = {
         "icon.png": "khapicon.png",
         "preview.png": "preview.png",
     }
 
-    SCRIPT_FILES = {
+    scriptfiles = {
         "hb32btl.script": "hb32btl.script",
         "hb33btl.script": "hb33btl.script",
         "hb34btl.script": "hb34btl.script",
@@ -642,11 +642,11 @@ def patch_kh2(self, output_directory):
     sourcefolderloc = Path(__file__).parent.resolve() / "data"
     if sourcefolderloc.exists():
         try:
-            for mod_name, file_name in ICON_FILES.items():
+            for mod_name, file_name in iconfiles.items():
                 with open(sourcefolderloc / file_name, "rb") as f:
                     openkhmod[mod_name] = f.read()
             if self.options.HarderAS:
-                for mod_name, file_name in SCRIPT_FILES.items():
+                for mod_name, file_name in scriptfiles.items():
                     with open(sourcefolderloc / file_name, "rb") as f:
                         openkhmod[mod_name] = f.read()
         except IOError as openerror:
@@ -657,11 +657,11 @@ def patch_kh2(self, output_directory):
     if apworldloc.is_file():
         try:
             with zipfile.ZipFile(Utils.user_path(apworldloc), "r") as apworld_archive:
-                for mod_name, file_name in ICON_FILES.items():
+                for mod_name, file_name in iconfiles.items():
                     with apworld_archive.open(f"kh2/data/{file_name}", "r") as f:
                         openkhmod[mod_name] = f.read()
                 if self.options.HarderAS:
-                    for mod_name, file_name in SCRIPT_FILES.items():
+                    for mod_name, file_name in scriptfiles.items():
                         with apworld_archive.open(f"kh2/data/{file_name}", "r") as f:
                             openkhmod[mod_name] = f.read()
         except IOError as openerror:
