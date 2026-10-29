@@ -145,6 +145,7 @@ class KH2Socket:
 
         if msg_type == MessageType.WorldLocationChecked:
             self.client.world_locations_checked.add(int(message[1]))
+            self.send(MessageType.WorldLocationChecked, [message[1]])
 
         elif msg_type == MessageType.LevelChecked:
             self.client.sora_levels[message[2]] = int(message[1])
