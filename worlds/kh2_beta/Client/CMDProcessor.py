@@ -11,7 +11,7 @@ else:
 
 class KH2CommandProcessor(ClientCommandProcessor):
     ctx: KH2Context
-    VALID_NOTIF_TYPES = {"puzzle", "info", "chest", "none"}
+    valid_notification_types = {"puzzle", "info", "chest", "none"}
 
     def _cmd_receive_notif(self, notification_type: str = ""):
         """Change receive notification type.Valid Inputs:Puzzle, Info, Chest and None
@@ -21,7 +21,7 @@ class KH2CommandProcessor(ClientCommandProcessor):
         None: Toggle off any of the receiving notifications.
         """
         notification_type = notification_type.lower()
-        if notification_type in self.VALID_NOTIF_TYPES:
+        if notification_type in self.valid_notification_types:
             temp_client_settings = self.ctx.client_settings["receive_popup_type"]
             self.ctx.client_settings["receive_popup_type"] = notification_type
             self.ctx.socket.send(MessageType.NotificationType, ["R", notification_type])
@@ -37,7 +37,7 @@ class KH2CommandProcessor(ClientCommandProcessor):
         None: Toggle off any of the receiving notifications.
         """
         notification_type = notification_type.lower()
-        if notification_type in self.VALID_NOTIF_TYPES:
+        if notification_type in self.valid_notification_types:
             temp_client_settings = self.ctx.client_settings["send_popup_type"]
             self.ctx.client_settings["send_popup_type"] = notification_type
             self.ctx.socket.send(MessageType.NotificationType, ["S", notification_type])
@@ -85,7 +85,3 @@ class KH2CommandProcessor(ClientCommandProcessor):
         """Removes player from the deathlink blacklist"""
         if player_name in self.ctx.deathlink_blacklist:
             self.ctx.deathlink_blacklist.remove(player_name)
-
-    #def _cmd_kill(self):
-    #    """Test deathlink"""
-    #    self.ctx.socket.send(MessageType.Deathlink,())
