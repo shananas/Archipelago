@@ -457,7 +457,7 @@ class KH2Context(CommonContext):
             logging_pairs = [
                 ("Client", "Archipelago")
             ]
-            base_title = "Archipelago KH2 Client"
+            base_title = "Archipelago KH2 Client Beta"
 
         self.ui = KH2Manager(self)
         self.ui_task = asyncio.create_task(self.ui.async_run(), name="UI")
@@ -557,7 +557,7 @@ async def main(args: Namespace):
 def launch(*args: str):
     import colorama
 
-    parser = get_base_parser(description="KH2 Client, for text interfacing.")
+    parser = get_base_parser(description="KH2 Client Beta, for text interfacing.")
     parser.add_argument("--name", default=None)
     parser.add_argument("url", nargs="?")
 

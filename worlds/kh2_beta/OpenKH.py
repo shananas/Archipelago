@@ -658,11 +658,11 @@ def patch_kh2(self, output_directory):
         try:
             with zipfile.ZipFile(Utils.user_path(apworldloc), "r") as apworld_archive:
                 for mod_name, file_name in iconfiles.items():
-                    with apworld_archive.open(f"kh2/data/{file_name}", "r") as f:
+                    with apworld_archive.open(f"kh2_beta/data/{file_name}", "r") as f:
                         openkhmod[mod_name] = f.read()
                 if self.options.HarderAS:
                     for mod_name, file_name in scriptfiles.items():
-                        with apworld_archive.open(f"kh2/data/{file_name}", "r") as f:
+                        with apworld_archive.open(f"kh2_beta/data/{file_name}", "r") as f:
                             openkhmod[mod_name] = f.read()
         except IOError as openerror:
             logging.warning(openerror)
